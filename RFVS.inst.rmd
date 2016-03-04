@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+author: "Colin Kirkmire"
+date: "March 3, 2016"
+output: html_document
+---
+git config --global user.name "kirkmire"
+git config --global user.email "kirkmirecp@gmail.com"
+
+You must match the machine architecture: run 32-bit R if you have 32-bit FVS and 64-bit R if you have built FVS as 64-bit.  32 bit seems to be the reccomended combination.  Change between 32 nd 64 bit through tools->global options->rversion.
+
+Download the rFVS file here (21 files total): https://sourceforge.net/p/open-fvs/code/HEAD/tree/rFVS/
+
+The first step is to start R and load the rFVS functions found in <open-fvs>/rFVS/R. Remember to replace the string <open-fvs> with the pathname of where you have stored your copy of (r?)FVS. The notation <open-fvs>/ defines the directory where the open-fvs code is stored on your system. Modify this string so that the path name to the files can be found (remember to change \ to /).
+```{r}
+sdir = "<C:/rFVS>/R"
+
+
+for (rf in dir (sdir)) source (paste(sdir,rf,sep="/"))
+
+
+# load the FVS library
+fvsLoad("FVSiec")
+
+# specify the keyword file
+fvsSetCmdLine("--keywordfile=iet01.key")
+
+# Run the simulation as would be done using FVS as a program
+fvsRun()
+```
